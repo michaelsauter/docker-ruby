@@ -1,4 +1,5 @@
-FROM michaelsauter/alpine:3.2
+FROM       michaelsauter/alpine:3.2
+MAINTAINER Michael Sauter <mail@michaelsauter.net>
 
 RUN sudo apk-install ruby \
                      ruby-dev \
