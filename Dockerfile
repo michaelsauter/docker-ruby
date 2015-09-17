@@ -1,7 +1,7 @@
 FROM       michaelsauter/alpine:3.2
 MAINTAINER Michael Sauter <mail@michaelsauter.net>
 
-RUN sudo apk-install ruby \
+RUN sudo apk-install ruby=2.2.2-r0 \
                      ruby-dev \
                      ruby-bundler; \
     sudo rm -fr /usr/share/ri
