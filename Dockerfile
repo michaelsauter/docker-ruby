@@ -4,7 +4,8 @@ MAINTAINER Michael Sauter <mail@michaelsauter.net>
 RUN sudo apk-install ruby=2.2.4-r0 \
                      ruby-dev \
                      ruby-bundler \
-                     ruby-io-console; \
+                     ruby-io-console \
+                     ruby-irb; \
     sudo rm -fr /usr/share/ri
 
 RUN sudo chgrp -R default /usr/local/lib/site_ruby; \
