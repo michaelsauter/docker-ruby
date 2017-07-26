@@ -1,18 +1,25 @@
-FROM       michaelsauter/alpine:3.3
+FROM       michaelsauter/ubuntu:16.04
 MAINTAINER Michael Sauter <mail@michaelsauter.net>
 
-RUN sudo apk-install ruby=2.2.4-r0 \
-                     ruby-dev \
-                     ruby-bundler \
-                     ruby-io-console \
-                     ruby-irb; \
-    sudo rm -fr /usr/share/ri
+RUN sudo apt-get install -y git \
+    libreadline-dev \
+    libssl-dev \
+    libxml2-dev \
+    libxslt-dev \
+    zlib1g-dev \
+    libbz2-dev
 
-RUN sudo chgrp -R default /usr/local/lib/site_ruby; \
-    sudo chmod -R g+w /usr/local/lib/site_ruby
+RUN cd /tmp;                                \
+    curl -LO https://github.com/sstephenson/ruby-build/archive/v20170523.tar.gz; \
+    sudo chown default: *.tar.gz;           \
+    tar xvzf *.tar.gz; rm -f *.tar.gz;      \
+    cd ruby-build*;                         \
+    ./bin/ruby-build 2.4.1 /usr/local; \
+    cd; rm -rf /tmp/ruby-build*
 
-COPY files/gemrc /home/default/.gemrc
-ENV GEM_HOME /home/default/.gem/ruby/2.2.0
+RUN gem install bundler --no-rdoc --no-ri
+RUN gem install pry --no-rdoc --no-ri
 
-RUN gem install pry
-RUN gem update --system
+RUN gem update --system --no-document
+
+ENV PATH .bundle/bin:$PATH
