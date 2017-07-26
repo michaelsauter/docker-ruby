@@ -1,4 +1,4 @@
-TAG ?= 2.4.1
+TAG ?= 2.4
 
 build: Dockerfile
 	docker build -t michaelsauter/ruby:$(TAG) .
